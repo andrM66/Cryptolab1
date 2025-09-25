@@ -2,7 +2,7 @@ from operator import indexOf
 
 
 def cypher_text(input_filename: str, output_filename: str, key_filename) -> None:
-    f = open(input_filename)
+    f = open(input_filename, encoding='utf-8')
     open_text = f.read()
     f.close()
     f = open(key_filename)
@@ -25,14 +25,14 @@ def cypher_text(input_filename: str, output_filename: str, key_filename) -> None
             tmp_text_array = tmp_text_array.replace("0", " ")
             tmp_text_array = list(tmp_text_array)
     result = result + tmp_text_array
-    f = open(output_filename, "w")
+    f = open(output_filename, "w", encoding='utf-8')
     result = "".join(result)
     f.write(result)
     f.close()
 
 
 def decypher_text(input_filename: str, key_filename: str, output_filename: str) -> None:
-    f = open(input_filename)
+    f = open(input_filename, encoding='utf-8')
     cyphered_text = f.read()
     f.close()
     f = open(key_filename)
@@ -49,7 +49,8 @@ def decypher_text(input_filename: str, key_filename: str, output_filename: str) 
     tmp_cyphered_text = [list(cyphered_text[i:i + key_length]) for i in range(0, len(cyphered_text), key_length)]
     print(tmp_cyphered_text)
     for i in range(len(cyphered_text)):
-        tmp_text_array[i % key_length] = tmp_cyphered_text[i // key_length][ indexOf(key, i % key_length)]
+        print(indexOf(key, i % key_length))
+        tmp_text_array[indexOf(key, i % key_length)] = tmp_cyphered_text[i // key_length][ i % key_length]
         if i % key_length == 17:
             result = result + tmp_text_array
             tmp_text_array = " "
@@ -57,7 +58,7 @@ def decypher_text(input_filename: str, key_filename: str, output_filename: str) 
             tmp_text_array = tmp_text_array.replace("0", " ")
             tmp_text_array = list(tmp_text_array)
     result = result + tmp_text_array
-    f = open(output_filename, "w")
+    f = open(output_filename, "w", encoding='utf-8')
     result = "".join(result)
     f.write(result)
     f.close()
