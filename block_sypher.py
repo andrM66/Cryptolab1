@@ -47,9 +47,7 @@ def decypher_text(input_filename: str, key_filename: str, output_filename: str) 
     tmp_text_array = tmp_text_array.replace("0", " ")
     tmp_text_array = list(tmp_text_array)
     tmp_cyphered_text = [list(cyphered_text[i:i + key_length]) for i in range(0, len(cyphered_text), key_length)]
-    print(tmp_cyphered_text)
     for i in range(len(cyphered_text)):
-        print(indexOf(key, i % key_length))
         tmp_text_array[indexOf(key, i % key_length)] = tmp_cyphered_text[i // key_length][ i % key_length]
         if i % key_length == 17:
             result = result + tmp_text_array
@@ -62,7 +60,6 @@ def decypher_text(input_filename: str, key_filename: str, output_filename: str) 
     result = "".join(result)
     f.write(result)
     f.close()
-    print(result)
 
 
 
